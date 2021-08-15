@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="bg-gradient-primary container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <center>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form class="user" method="POST" action="">
+                            {% csrf_token %}
+                            {{form|crispy}}
+
+                            
+                           
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked="checked"/><i class="check-box"></i>Accept Terms & Conditions ?
+                                </label>
+                            </div>
+                            <button type="Submit" name="submit" value="Submit" class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </button>
+
+                            <hr>
+                            <a href="index.html" class="btn btn-google btn-user btn-block">
+                                <i class="fab fa-google fa-fw"></i> Register with Google
+                            </a>
+                            <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                            </a>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" href="{% url 'signin' %}">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </center>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}

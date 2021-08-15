@@ -1,0 +1,63 @@
+{% extends 'sidebarbase.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" >
+          
+            <div class="row">
+
+              <!-- Content Column -->
+              <div class="">
+                
+                  <!-- Illustrations -->
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">ADD AN EVENT </h6>
+                      </div>
+                      <div class="card-body">
+                         
+                           <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                      class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          </div>
+          <p class="mb-4">
+            Discover research programmes that look into Water Sensitive Design in South Africa. Find out about their design and implementation. Learn from their insights and recommendations.            </p>
+
+
+          <!-- Content Row -->
+          <form method="POST" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+
+              {{form}} 
+                  <br>
+                <button type="submit" class="btn btn-primary ">
+                  Send
+                </button>
+            </form>
+            <br>
+
+         
+                          
+          
+          
+          
+          
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+           
+
+        <!-- /.container-fluid -->
+        <!-- Scroll to Top Button-->
+
+{% endblock %}
+
+
+
+

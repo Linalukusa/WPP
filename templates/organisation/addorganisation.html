@@ -1,0 +1,109 @@
+{% extends 'sidebarbase.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" >
+            <div class="row">
+
+              <!-- Content Column -->
+              <div class="">
+                
+                  <!-- Illustrations -->
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                          <h1 class="h3 mb-0 text-gray-800 font-weight-bold text-primary">ADD AN ORGANISATIONAL PROFILE </h1>
+
+                      </div>
+                      <div class="card-body">
+                         
+                            <!-- Page Heading -->
+          
+          <p class="mb-4"> Fill out the details below to submit an organisation.
+
+          </p>
+
+          <!-- Content Row -->
+          <form method="POST" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+
+            <div class="form-row">
+              <div class="col">
+                <div   >
+                  {{ form.organisationname|as_crispy_field }}
+
+                  </div>
+              </div>
+              <div class="col">
+                <div   >
+                  {{ form.projectlogo|as_crispy_field }}
+
+                  </div>                  </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <div class="col">
+                <div   >
+                  {{ form.province|as_crispy_field }}
+
+                  </div>
+              </div>
+              <div class="col">
+                <div   >
+                  {{ form.city|as_crispy_field }}
+
+
+                  </div>                  </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <div class="col">
+                <div   >
+                  {{ form.website|as_crispy_field }}
+
+                  </div>
+              </div>
+              <div class="col">
+                <div   >
+                  {{ form.email|as_crispy_field }}
+
+
+                  </div>                  </div>
+            </div>
+            <br>
+            <div class="form-outline">
+              <div   >
+                {{ form.vision|as_crispy_field }}
+
+                </div>                   
+              </div>
+                <br>
+                <div class="form-outline">
+                  <div   >
+                    {{ form.mission|as_crispy_field }}
+    
+                    </div>                   
+                  </div>
+            <br>
+            <div class="form-outline">
+              <div   >
+                {{ form.achieved|as_crispy_field }}
+
+                </div>                   </div>
+            <br>
+                <button type="submit" class="btn btn-primary ">
+                  Send
+                </button>
+            </form>
+            <br>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          
+        </div>
+        <!-- /.container-fluid -->
+        <!-- Scroll to Top Button-->
+
+{% endblock %}

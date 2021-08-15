@@ -1,0 +1,82 @@
+{% extends 'sidebarbase.html' %}
+
+{% block content %}
+          <!-- Begin Page Content -->
+          <div class="container-fluid" >
+
+            <div class="row">
+
+              <!-- Content Column -->
+              <div class="">
+                
+                  <!-- Illustrations -->
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">REPORT AN ISSUE </h6>
+                      </div>
+                      <div class="card-body">
+                         
+                        <!-- Page Heading -->
+           
+          <!-- Content Row -->
+          <form method="POST" action="">
+            {% csrf_token %}
+
+              <div class="form-row">
+                <div class="col">
+                  <Label class="mb-0 text-gray-800" >Reported by*</Label>
+                  <input type="text" class="form-control border-left-info" name="resourcetitle" required=required >
+                </div>
+                <div class="col">
+                  <Label class="mb-0 text-gray-800" >Severity</Label>
+                  <input type="text" class="form-control border-left-info"name ="resourcedescription" required=required >
+                </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col">
+                  <Label class="mb-0 text-gray-800" >Priority</Label>
+                  <input type="text" class="form-control  border-left-info" name="publisher" required=required >
+                </div>
+                <div class="col">
+                  <Label class="mb-0 text-gray-800" >Reproducibility</Label>
+                  <input type="text" class="form-control  border-left-info" name="publicationdate" >
+                </div>
+              </div>
+              <br>
+              <label>Provide Picture/Video         </label>
+                <div class="col">
+                  <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+                </div>
+                <br>
+              <Label class="mb-0 text-gray-800" > Description of the Issue*</Label>
+                <div class="form-outline">
+                  <textarea class="form-control border-left-info"  required=required id="projectsummary" name="projectsummary" rows="5"></textarea>
+                </div>
+                
+          
+                <br>
+                <button type="submit" class="btn btn-primary ">
+                  Send
+                </button>
+            </form>
+            <br>
+
+         
+
+      </div>  
+                          
+          
+          
+          
+          
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        <!-- /.container-fluid -->
+        <!-- Scroll to Top Button-->
+
+{% endblock %}

@@ -1,0 +1,18 @@
+@login_required
+def edit_discussion(request, discussion_id):
+    '''A view where a discussion, with the ID of discussion_id, can be edited'''
+    discussion_to_update = Discussion.objects.get(id__exact=discussion_id)
+    if request.method == 'POST':
+        form = DiscussionUpdateForm(request.POST, instance=discussion_to_update)
+        if form.is_valid():
+            edited_discussion = form.save()
+            messages.success(request, 'Discussion has been updated')
+            return redirect(edited_discussion.get_absolute_url())
+    else:
+        form = DiscussionUpdateForm(instance=discussion_to_update)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'discussion/discussion_edit.html', context)

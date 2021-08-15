@@ -1,0 +1,108 @@
+{% extends 'sidebarbase.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" >
+          
+            <div class="row">
+
+              <!-- Content Column -->
+              <div class="">
+                
+                  <!-- Illustrations -->
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold text-primary">SHARE AN EVENT </h1>
+                    </div>
+                      <div class="card-body">
+                         
+                   
+          <p class="mb-4">
+            Discover research programmes that look into Water Sensitive Design in South Africa. Find out about their design and implementation. Learn from their insights and recommendations.            </p>
+
+
+          <!-- Content Row -->
+          <form method="POST" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+
+              <div class="form-row">
+                <div class="col">
+                  <div   >
+                    {{ form.name|as_crispy_field }}
+
+                    </div>
+                </div>
+                <div class="col">
+                  <div   >
+                    {{ form.logo|as_crispy_field }}
+
+                    </div>                  </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col dropdown">
+                  <div   >
+                    {{ form.location|as_crispy_field }}
+
+                    </div>
+                </div>
+              
+              </div> 
+            <br>
+         
+             
+                <br>
+                
+                <div class="form-outline">
+                  <div   >
+                    {{ form.description|as_crispy_field }}
+
+                    </div>                   </div>
+                   
+                <br>
+              
+                <div class="form-row">
+                  <div class="col dropdown">
+                    <div   >
+                      {{ form.website|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                  <div class="col">
+                    <div   >
+                      {{ form.email|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                </div> 
+                  <br>
+                <button type="submit" class="btn btn-primary ">
+                  Send
+                </button>
+            </form>
+            <br>
+
+         
+                          
+          
+          
+          
+          
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+           
+
+        <!-- /.container-fluid -->
+        <!-- Scroll to Top Button-->
+
+{% endblock %}
+
+
+
+

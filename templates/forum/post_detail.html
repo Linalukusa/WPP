@@ -1,0 +1,121 @@
+{% extends "sidebarbase.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <p><strong>{{ post.author }}</strong> {{ post.created_on }}</p>
+            <p>{{ post.body }}</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12">
+            <h5>Add a Comment!</h5>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-md-5 col-sm-12">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success mt-3">Submit!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for comment in comments %}
+    {% if comment.is_parent %}
+    <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <div>
+                <a href="{% url 'profile' comment.author.profile.pk %}"><img class="rounded-circle post-img" height="30" width="30" src="{{ comment.author.profile.picture.url }}" /></a>
+                    <p class="post-text"><a class="post-link text-primary" href="{% url 'profile' comment.author.profile.pk %}">@{{ comment.author }}</a> {{ comment.created_on }}</p>
+                <div class="mb-3">
+                    {% if request.user == comment.author %}
+                        <a href="{% url 'comment-delete' post.pk comment.pk %}" class="edit-color"><i class="fas fa-trash"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            <p>{{ comment.comment }}</p>
+            <div class="d-flex flex-row">
+                <form method="POST" action="{% url 'comment-like' post.pk comment.pk%}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="remove-default-btn" type="submit"><i class="far fa-thumbs-up"></i> <span>{{ comment.likes.all.count }}</span></button>
+                </form>
+
+                <form method="POST" action="{% url 'comment-dislike' post.pk comment.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="remove-default-btn" type="submit"><i class="far fa-thumbs-down"></i> <span>{{ comment.dislikes.all.count }}</span></button>
+                </form>
+            </div>
+            <div>
+                <button class="remove-default-btn"><i class="far fa-comment-dots" onclick="commentReplyToggle('{{ comment.pk }}')"></i></button>
+              </div>
+              
+              <div class="row justify-content-center mt-3 mb-5 d-none" id="{{ comment.pk }}">
+                 <div class="col">
+                   <form method="POST" action="{% url 'comment-reply' post.pk comment.pk %}">
+                     {% csrf_token %}
+                     {{ form | crispy }}
+                     <div class="d-grid gap-2">
+                       <button class="btn btn-success mt-3">Submit!</button>
+                     </div>
+                    </form>
+                  </div>
+              </div>
+        </div>
+    </div>
+    {% for child_comment in comment.children %}
+    <div class="row justify-content-center mt-3 mb-5 child-comment">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <div>
+                <a href="{% url 'profile' child_comment.author.profile.pk %}"><img class="rounded-circle post-img" height="30" width="30" src="{{ child_comment.author.profile.picture.url }}" /></a>
+                    <p class="post-text"><a class="post-link text-primary" href="{% url 'profile' child_comment.author.profile.pk %}">@{{ child_comment.author }}</a> {{ child_comment.created_on }}</p>
+                <div class="mb-3">
+                    {% if request.user == child_comment.author %}
+                        <a href="{% url 'comment-delete' post.pk child_comment.pk %}" class="edit-color"><i class="fas fa-trash"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            <p>{{ child_comment.comment }}</p>
+
+            <div class="d-flex flex-row">
+                <form method="POST" action="{% url 'comment-like' post.pk child_comment.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="remove-default-btn" type="submit"><i class="far fa-thumbs-up"></i> <span>{{ child_comment.likes.all.count }}</span></button>
+                </form>
+
+                <form method="POST" action="{% url 'comment-dislike' post.pk child_comment.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="remove-default-btn" type="submit"><i class="far fa-thumbs-down"></i> <span>{{ child_comment.dislikes.all.count }}</span></button>
+                </form>
+                <div>
+                    <button class="remove-default-btn"><i class="far fa-comment-dots" onclick="commentReplyToggle('{{ comment.pk }}')"></i></button>
+                  </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="row justify-content-center mt-3">
+    <div class="col-md-5 col-sm-12 border-bottom">
+        <p>
+            <strong>{{ post.author }}</strong> {{ post.created_on }}
+            {% if request.user == post.author %}
+            <a href="{% url 'post-edit' post.pk %}" style="color: #333;"><i class="far fa-edit"></i></a>
+            <a href="{% url 'post-delete' post.pk %}" style="color: #333;"><i class="fas fa-trash"></i></a>
+            {% endif %}
+        </p>
+        <p>{{ post.body }}</p>
+    </div>
+</div>
+{% endblock content %}

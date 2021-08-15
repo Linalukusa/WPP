@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load agravatar_url_tag %}
+{% block content %}
+    <div class="content-section">
+        <h4>{{ event.name }}</h4>
+        <div class="row justify-content-center">
+            <div class="col">
+                <img src="{{ event.owner.email|gravatar_url:26 }}" width="26" height="26" alt="author-avatar"
+                     class="rounded-circle"/>
+                <span>{{ event.owner.name }}</span>
+                <span>on {{ event.created_time|date }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Location: {{ event.location }}</p>
+                <p>Start: {{ event.start_time|date }}  End: {{ event.end_time|date }}</p>
+                <p>{{ event.description }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% if is_owner %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'edit_event' event_id=event.id %}">
+                        Edit
+                    </a>
+                {% endif %}
+                {% if is_owner %}
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_event' event_id=event.id %}">
+                        Delete
+                    </a>
+                {% endif %}
+                {%  if is_participating %}
+                    <form method="POST" action="{% url 'leave_or_reject_event' event_id=event.id %}">
+                        {% csrf_token %}
+                    <button class="btn btn-primary btn-sm" type="submit">
+                        {% if accepted %}
+                            Leave
+                            {% else %}
+                            Reject Invitation
+                            {% endif %}
+                    </button>
+                    </form>
+                {% endif %}
+                {%  if is_participating and not accepted %}
+                    <form method="POST" action="{% url 'accept_invitation' event_id=event.id %}">
+                        {% csrf_token %}
+                    <button class="btn btn-primary btn-sm" type="submit">
+                        Accept Invitation
+                    </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+{% block actions %}
+    {% if is_participating or is_owner %}
+    <div class="content-section">
+
+        <div class="input-group">
+            <input id="search-friend" type="text" class="form-control" aria-label="search friend field"
+                   placeholder="Add friend"/>
+            <div class="input-group-append">
+                    <button onclick="handleSearchFriend()" type="button" class="btn btn-outline-primary">Search</button>
+                </div>
+        </div>
+        <ul class="list-group" id="search-friend-result">
+
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block content2 %}
+    <div class="content-section">
+        <h3>Participants in this Event</h3>
+        <ul class="list-group">
+            {% for participant in participants %}
+                <li class="list-group-item list-group-item-light">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="{{ participant.invitee.email|gravatar_url:30}}" width="30" height="30"/>
+                        </div>
+                        <div class="col">
+                            <p>{{ participant.invitee.name }}</p>
+                            <p>{% if participant.accepted %} Accepted {% endif %}{% if not participant.accepted %} Not Accepted {% endif %}</p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        </p>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    
+{% endblock %}

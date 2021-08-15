@@ -1,0 +1,158 @@
+{% extends 'sidebarbase.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid" >
+
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">SUBMIT A PROJECT</h1>
+                
+            </div>
+            <p class="mb-4">The template for project profiles allows you to provide information on many different aspects – from a general project description to monitoring and evaluation. You don't need to fill in all the information. But the more you fill in, the more informative it will be.</p>
+
+            <!-- Content Row -->
+            <form method="POST" enctype="multipart/form-data" action="">
+              {% csrf_token %}
+              {{ form.media }}
+
+
+
+                <div class="form-row">
+                  <div class="col">
+                    <div   >
+                      {{ form.leadorganisations|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                  <div class="col">
+                    <div   >
+                      {{ form.projectname|as_crispy_field }}
+ 
+                      </div>    
+                  </div>
+                </div>
+                <div   >
+                  {{ form.projectlogo|as_crispy_field }}
+
+                  </div>
+                <br>
+                <div class="form-row">
+                  <div class="col dropdown">
+                    <div   >
+                      {{ form.province|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                  <div class="col">
+                    <div   >
+                      {{ form.city|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                </div>
+                <br>
+                <div class="form-group">
+                  <div   >
+
+                    </div>
+                </div> 
+              <br>
+                <div class="form-row">
+                  <div class="col">
+                    <div   >
+                      {{ form.maintheme|as_crispy_field }}
+ 
+                      </div>                  </div>
+                  <div class="col">
+                    <div   >
+                      {{ form.topic|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                </div>
+                <br>
+                <div class="form-row">
+                  <div class="col">
+                    <div   >
+                      {{ form.website|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                  <div class="col">
+                    <div   >
+                      {{ form.linkedin|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                </div>
+                  <br>
+                  <Label class="mb-0 text-gray-800" >Timeframe*</Label> 
+
+                <div class="form-row">
+                  <br>
+                  <div class="col">
+                    <input class="date-picker form-control border-left-info" placeholder="Start date" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                    <script>
+                      function timeFunctionLong(input) {
+                          setTimeout(function() {
+                              input.type = 'text';
+                          }, 60000);
+                      }
+                  </script>
+                  </div>
+                  <div class="col">
+                    <input class="date-picker form-control border-left-info" placeholder="End date" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                    <script>
+                      function timeFunctionLong(input) {
+                          setTimeout(function() {
+                              input.type = 'text';
+                          }, 60000);
+                      }
+                  </script>
+                  </div>
+                </div>
+                <br>
+                  <div class="form-outline">
+                    <div   >
+                      {{ form.projectsummary|as_crispy_field}}
+ 
+                      </div>
+                  <br>
+                  <div class="form-outline">
+                    <div   >
+                      {{ form.whatwedo|as_crispy_field }}
+ 
+                      </div>
+                    </div>
+                  <br>
+                  <div class="form-outline">
+                    <div   >
+                      {{ form.howwedo|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                  <br>
+                  <div class="form-outline">
+                    <div   >
+                      {{ form.achieved|as_crispy_field }}
+ 
+                      </div>
+                  </div>
+                  <br>
+                  <button type="submit" class="btn btn-primary ">
+                    Send
+                  </button>
+              </form>
+              <br>
+
+           
+
+        </div>
+        <!-- /.container-fluid -->
+        <!-- Scroll to Top Button-->
+
+{% endblock %}

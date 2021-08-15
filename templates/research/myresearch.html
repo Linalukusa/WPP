@@ -1,0 +1,101 @@
+{% extends "sidebarbase.html" %}
+{% block content %}
+{% load static %} 
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid" >
+        
+          <!-- Begin Page Content -->
+    <div class="container-fluid" >
+        <!-- Content Row -->
+        <div class="row">
+
+          <!-- Content Column -->
+          <div class="">
+            
+              <!-- Illustrations -->
+              <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h1 class="h3 mb-0 text-gray-800 font-weight-bold text-primary">MY RESEARCH </h1>
+                </div>
+                  <div class="card-body">
+                    
+                      
+                    
+                    <p class="mb-4">Discover research programmes that look into Water Sensitive Design in South Africa. Find out about their design and implementation. Learn from their insights and recommendations.</p>
+                   
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{% url 'research-search' %}">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for... "  name='query' value="{{ request.GET.query }}"
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    </nav>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+            
+      
+        <!-- Page Heading -->
+        </div>
+
+        <section class="ftco-section ftco-candidates ftco-candidates-2 bg-light">
+
+            <div class="container-fluid">
+  
+              <div class="row">
+                  <div class=" pr-lg-4"> 
+                    {% for research in posts %}
+    
+          <div class="row ">
+  
+              <div class="col-md-12">
+                  <div class="text pl-md-4 bg-white">
+                      <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                          <div class="d-flex align-items-end justify-content-between">
+                              <div class="d-flex align-items-center">
+                                  {% if user.is_authenticated %}
+                                  <img class="img-profile rounded-circle" width=60 src="">
+                                  <div class="small">
+                                    <h5 class="fw-bold"><a style="text-decoration: none;" class="text-primary" href="{% url 'research' research_id=research.id %}">{{ research.title }}</a></h5>
+                                    <br>  <p class="text-muted">{{research.description|slice:":300" }}</p>
+                                <p><div class="badge bg-warning bg-gradient rounded-pill mb-2">PUBLISHED</div></p> 
+                                <p> <div class="badge bg-warning bg-gradient rounded-pill mb-2">RESEARCHERS:</div> {{research.leadresearcher}}</p> 
+                                </div>
+                                  {%endif%}
+                              </div>
+                          </div>
+                      </div>
+                      <div class="position-relative">
+                      <p>{{ post.body }}</p>
+                  </div>
+                  
+                         
+                </div>
+                  </div>
+                  <hr>
+              </div>
+          </div>
+          {% endfor %}
+
+          </div>
+
+      </div>
+      </div>
+      <br><center> {% include "pagination.html" with page=posts %}</center>  
+
+A
+  </section>
+
+
+{% endblock content %}

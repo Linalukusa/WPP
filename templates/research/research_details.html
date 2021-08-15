@@ -1,0 +1,93 @@
+{% extends "sidebarbase.html" %}
+{% block content %}
+{% load static %} 
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid" >
+        
+          <!-- Begin Page Content -->
+    <div class="container-fluid" >
+        <!-- Content Row -->
+        <div class="row">
+
+          <!-- Content Column -->
+          <div class="">
+            
+              <!-- Illustrations -->
+              <div class="col">
+                {% if is_owner %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'edit_research' research_id=research.id %}">
+                        Edit
+                    </a>
+                {% endif %}
+               
+            </div>
+              <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">RESEARCH PROJECTS </h6>
+                  </div>
+                  <div class="card-body">
+                    
+                      
+                    
+                    <p class="mb-4">Discover research programmes that look into Water Sensitive Design in South Africa. Find out about their design and implementation. Learn from their insights and recommendations.</p>
+                  
+            
+                 <!-- Blog preview section-->
+                 <section>
+                    <div class="container px-5">
+                        <div class="">
+            
+                            <div class="">
+                                <div class="">
+                                   <!---- {% if project.projectlogo %}
+                                    <img class="card-img-top" src="{{ project.projectlogo.url }}" alt="..." />
+                                    {% endif %}-->
+                                    <div class="">
+                                        <div class="badge bg-primary bg-gradient rounded-pill mb-2" href="">{{ research.title }}   </div>
+                                        <a class="text-decoration-none link-dark stretched-link" href=""><div class="h5 card-title mb-3">{{ research.projectname}}</div></a>
+                                        <p class="">{{ research.description }}</p>
+                                    </div>
+                        
+                                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                                        <div class="d-flex align-items-end justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img class="rounded-circle me-3" src="" alt="..." />
+                                                <div class="small">
+                                                    <div class="fw-bold">{{ research.owner }}</div>
+                                                    <div class="text-muted">{{ research.created_time }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div>
+                          <div class="col">
+                                {% if is_owner %}
+                                    <a class="btn btn-primary btn-sm" href="{% url 'edit_research' research_id=research.id %}">
+                                        Edit
+                                    </a>
+                                {% endif %}
+                               
+                            </div>
+                        {% include "pagination.html" with page=posts %}
+                    </div>
+                </section>
+
+
+
+
+                  </div>
+              </div>
+            </div>
+          </div>
+
+            
+      
+        <!-- Page Heading -->
+        </div>
+
+
+{% endblock content %}
